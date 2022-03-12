@@ -1,6 +1,8 @@
 import pygame
 import random
 
+## Krt
+
 class Game:
     def __init__(self):
         pygame.init()                                               #Thank you for the base "engine" code @blimly & @Gorane7 <3
