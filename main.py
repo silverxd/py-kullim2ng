@@ -3,23 +3,23 @@ import random
 
 class Game:
     def __init__(self):
-        pygame.init()
+        pygame.init()                                               #Thank you for the base "engine" code @blimly & @Gorane7 <3
         
         self.window_size = (640, 480)
         self.window = pygame.display.set_mode((self.window_size), 
-                                 pygame.RESIZABLE)
+                                 pygame.RESIZABLE)                  #MIND BLOWN
         self.clock = pygame.time.Clock()
 
-        self.wx, self.wy = pygame.display.get_surface().get_size()
+        self.wx, self.wy = pygame.display.get_surface().get_size()  #Get window resolution
 
-        self.x, self.y = 120, self.wy/2
+        self.x, self.y = 120, self.wy/2            #Scalable starting position
         self.running = True
 
-        self.moveX = 0
+        self.moveX = 0                             #Initialize some values
         self.moveY = 0
         self.color = [100, 100, 100]
 
-        self.x2, self.y2 = self.wx - 120,self.wy/2
+        self.x2, self.y2 = self.wx - 120,self.wy/2 #"I am proud of this" -silver
 
         self.moveX2 = 0
         self.moveY2 = 0
@@ -60,7 +60,7 @@ class Game:
                 elif event.key == pygame.K_UP:
                    self.moveX = 0
                    self.moveY =- 20
-        for event in event_list:            #This is absolutely genius (if in doubt, just double use the function and hope for the best LOL)
+        for event in event_list:            #TIf in doubt, just double use the function and hope for the best LOL
             if event.type == pygame.QUIT:
                 self.running = False
                 break
@@ -81,7 +81,7 @@ class Game:
                    self.moveX2 = 0
                    self.moveY2 =- 20
 
-        if self.y < 0 :
+        if self.y < 0 :                 #P1 logic
             self.y = self.wy - 10
         if self.x > self.wx - 10:
             self.x = 0
@@ -106,18 +106,18 @@ class Game:
 
     def update(self):
         pass
-        if self.state == "gameover":
+        if self.state == "gameover":        #Budget endscreen logic
             self.end_counter += 10
             if self.end_counter >= 200:
                 self.running = False
 
     def render(self):
         self.window.fill((51, 0, 0))
-        pygame.draw.rect(self.window, (self.color[0], self.color[1], self.color[2]), (self.x, self.y, 40, 40))
-        pygame.draw.rect(self.window, (255-self.color[0], 255-self.color[1], 255-self.color[2]), (self.x2, self.y2, 40, 40))
+        pygame.draw.rect(self.window, (self.color[0], self.color[1], self.color[2]), (self.x, self.y, 40, 40))                  #Draw P1
+        pygame.draw.rect(self.window, (255-self.color[0], 255-self.color[1], 255-self.color[2]), (self.x2, self.y2, 40, 40))    #And P2
 
         if self.state == "gameover":
-            self.end_surface.set_alpha(self.end_counter)
+            self.end_surface.set_alpha(self.end_counter)    #Render endscreen I think
             self.window.blit(self.end_surface, (0, 0))
 
         pygame.display.update()
@@ -127,10 +127,10 @@ class Game:
             self.event()
             self.update()
             self.render()
-            self.clock.tick(60)
+            self.clock.tick(60)     #BAD BAD BAD BAD BAD BAD BAD BAD
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':      #I honestly have no clue what this does
     game = Game()
     game.run()
     pygame.quit()
