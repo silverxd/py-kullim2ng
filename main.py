@@ -4,7 +4,7 @@ import random
 class Game:
     def __init__(self):
         pygame.init()
-        self.window = pygame.display.set_mode((1900, 1050), 
+        self.window = pygame.display.set_mode((640, 480), 
                                  pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
 
