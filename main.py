@@ -7,6 +7,9 @@ class Game:
         self.window = pygame.display.set_mode((1900, 1050), 
                                  pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
+
+        self.wx, self.wy = pygame.display.get_surface().get_size()
+
         self.x, self.y = 120, self.wy/2
         self.running = True
 
@@ -20,7 +23,7 @@ class Game:
         self.moveY2 = 0
 
 
-        self.wx, self.wy = pygame.display.get_surface().get_size()
+        
 
     def event(self):
         event_list = pygame.event.get()
