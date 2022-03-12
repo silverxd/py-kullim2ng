@@ -35,7 +35,7 @@ class Game:
         event_list = pygame.event.get()
         self.x += self.moveX
         self.y += self.moveY
-        self.x2 += self.moveX2                  #This is absolutely genius
+        self.x2 += self.moveX2                  #This is absolutely genius!
         self.y2 += self.moveY2
         self.color[0] = random.randint(0, 255)     #Will replace by smooth RGB fade later 
         self.color[1] = random.randint(0, 255)
