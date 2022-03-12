@@ -1,7 +1,7 @@
 # py-kullim2ng
 Kullimäng created by Silver and Rascy @ init2022<br />
 Based on PyGame<br />
-We decided to use [an amazing base](https://github.com/blimly/python_koolitus/blob/checkpoint1-game-loop/main.py) by [@blimly](https://github.com/blimly/) for the main engine and just build our own vision from there as we had nothing better to do haha
+We decided to use [an amazing base](https://github.com/blimly/python_koolitus/blob/checkpoint1-game-loop/main.py) by [@blimly](https://github.com/blimly/) for the main engine and just build our own vision from there because we had nothing better to do haha
 ## Project status
 
 - [x] Have the "Kull" move without having to repeatedly press the movement buttons
@@ -10,6 +10,8 @@ We decided to use [an amazing base](https://github.com/blimly/python_koolitus/bl
 - [x] Make the game 2-player
 - [x] Make the window resizable (relative player spawns)
 - [x] Add primitive endscreen
+- [x] Introduce better colors
+- [x] Replace "teleport" with "bounce" to make it more unique
 - [ ] Make everything look prettier
 - [ ] Uncap framerate (delta time?)
 - [ ] Add a timer
