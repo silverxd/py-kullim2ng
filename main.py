@@ -4,7 +4,9 @@ import random
 class Game:
     def __init__(self):
         pygame.init()
-        self.window = pygame.display.set_mode((640, 480), 
+        
+        self.window_size = (640, 480)
+        self.window = pygame.display.set_mode((self.window_size), 
                                  pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
 
@@ -22,8 +24,10 @@ class Game:
         self.moveX2 = 0
         self.moveY2 = 0
 
+        self.end_counter = 0
         self.state = "ingame"
-
+        self.end_surface = pygame.Surface(self.window_size)
+        self.end_surface.fill((255, 0, 0))
 
         
 
@@ -31,7 +35,7 @@ class Game:
         event_list = pygame.event.get()
         self.x += self.moveX
         self.y += self.moveY
-        self.x2 += self.moveX2
+        self.x2 += self.moveX2 #This is absolutely genius
         self.y2 += self.moveY2
         self.color[0] = random.randint(0, 255)
         self.color[1] = random.randint(0, 255)
@@ -56,7 +60,7 @@ class Game:
                 elif event.key == pygame.K_UP:
                    self.moveX = 0
                    self.moveY =- 20
-        for event in event_list:
+        for event in event_list:            #This is absolutely genius (if in doubt, just double use the function and hope for the best LOL)
             if event.type == pygame.QUIT:
                 self.running = False
                 break
@@ -64,7 +68,7 @@ class Game:
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
                     break
-                elif event.key == pygame.K_d:
+                elif event.key == pygame.K_d:   #P2 controls
                     self.moveX2 = 20
                     self.moveY2 = 0
                 elif event.key == pygame.K_a:
@@ -86,7 +90,7 @@ class Game:
         if self.y > self.wy - 10:
             self.y = 0
 
-        if self.y2 < 0:
+        if self.y2 < 0:                 #P2 logic
             self.y2 = self.wy - 10
         if self.x2 > self.wx - 10:
             self.x2 = 0
@@ -95,9 +99,9 @@ class Game:
         if self.y2 > self.wy - 10:
             self.y2 = 0
 
-        print(self.x, self.y, "VS", self.x2, self.y2)
+        print(self.x, self.y, "VS", self.x2, self.y2)   #Some debug code
         if abs((self.y - self.y2)) < 70 and abs((self.x - self.x2)) < 70:
-            self.game.state = "gameover"
+            self.state = "gameover"
 
 
     def update(self):
