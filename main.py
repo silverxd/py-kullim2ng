@@ -22,6 +22,8 @@ class Game:
         self.moveX2 = 0
         self.moveY2 = 0
 
+        self.state = "ingame"
+
 
         
 
@@ -95,16 +97,24 @@ class Game:
 
         print(self.x, self.y, "VS", self.x2, self.y2)
         if abs((self.y - self.y2)) < 70 and abs((self.x - self.x2)) < 70:
-            self.running = False
+            self.game.state = "gameover"
 
 
     def update(self):
         pass
+        if self.state == "gameover":
+            self.end_counter += 10
+            if self.end_counter >= 200:
+                self.running = False
 
     def render(self):
         self.window.fill((51, 0, 0))
         pygame.draw.rect(self.window, (self.color[0], self.color[1], self.color[2]), (self.x, self.y, 40, 40))
         pygame.draw.rect(self.window, (255-self.color[0], 255-self.color[1], 255-self.color[2]), (self.x2, self.y2, 40, 40))
+
+        if self.state == "gameover":
+            self.end_surface.set_alpha(self.end_counter)
+            self.window.blit(self.end_surface, (0, 0))
 
         pygame.display.update()
 
