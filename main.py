@@ -4,16 +4,17 @@ import random
 class Game:
     def __init__(self):
         pygame.init()
-        self.window = pygame.display.set_mode((1900, 1050))
+        self.window = pygame.display.set_mode((1900, 1050), 
+                                 pygame.RESIZABLEpip)
         self.clock = pygame.time.Clock()
-        self.x, self.y = 120, 500
+        self.x, self.y = 120, self.wy/2
         self.running = True
 
         self.moveX = 0
         self.moveY = 0
         self.color = [100, 100, 100]
 
-        self.x2, self.y2 = 1800,500
+        self.x2, self.y2 = self.wx - 120,self.wy/2
 
         self.moveX2 = 0
         self.moveY2 = 0
