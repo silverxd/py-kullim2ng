@@ -1,7 +1,7 @@
 import pygame
 import random
 
-## Krt
+## Krt ei toimi
 
 class Game:
     def __init__(self):
