@@ -99,18 +99,18 @@ class Game:
                    self.moveY2 =- 20
 
         if self.y < 0 :                 # P1 logic
-            self.moveY = 10
-        if self.x > self.wx - 40:
-            self.moveX = -10
-        if self.x < 0:
+            self.moveY = 10             # Used to be here to teleport player
+        if self.x > self.wx - 40:       # to the other side of the window upon
+            self.moveX = -10            # reaching the end, but was replaced
+        if self.x < 0:                  # by an epic BOUNCE function.
             self.moveX = 10
         if self.y > self.wy - 40:
             self.moveY = -10
 
         if self.y2 < 0:                 # P2 logic
             self.y2 = self.wy - 10
-        if self.x2 > self.wx - 10:
-            self.x2 = 0
+        if self.x2 > self.wx - 10:      # Doesn't seem to have the "bounce"
+            self.x2 = 0                 # behavior yet?
         if self.x2 < 0:
             self.x2 = self.wx - 10
         if self.y2 > self.wy - 10:
@@ -162,7 +162,7 @@ class Game:
 
 ###################################
 
-        if abs((self.y - self.y2)) < 70 and abs((self.x - self.x2)) < 70:
+        if abs((self.y - self.y2)) < 40 and abs((self.x - self.x2)) < 40:   # INSANE COLLISION TESTER
             self.state = "gameover"
 
 
