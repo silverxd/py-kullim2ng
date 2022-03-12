@@ -1,7 +1,7 @@
 # py-kullim2ng
-Kullimäng created by Silver and Rascy @ init2022
-Based on PyGame
-We decided to use https://github.com/blimly/python_koolitus/blob/checkpoint1-game-loop/main.py for the main engine and just build our own vision from there as we had nothing better to do haha
+Kullimäng created by Silver and Rascy @ init2022<br />
+Based on PyGame<br />
+We decided to use [an amazing base](https://github.com/blimly/python_koolitus/blob/checkpoint1-game-loop/main.py) by @blimly for the main engine and just build our own vision from there as we had nothing better to do haha
 ## Project status
 
 - [x] Have the "Kull" move without having to repeatedly press the movement buttons
@@ -17,3 +17,4 @@ We decided to use https://github.com/blimly/python_koolitus/blob/checkpoint1-gam
 - [ ] Proper endscreen
 - [ ] Add bots/AI/single player mode
 - [ ] Add online multiplayer
+- [ ] Join TalTech :P
