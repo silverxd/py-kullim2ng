@@ -8,6 +8,7 @@ We decided to use [an amazing base](https://github.com/blimly/python_koolitus/bl
 - [x] Add some colors
 - [x] Make it so you teleport to the other side of the screen when attempting to go offscreen
 - [x] Make the game 2-player
+- [x] Collision detection
 - [x] Make the window resizable (relative player spawns)
 - [x] Add primitive endscreen
 - [x] Introduce better colors
