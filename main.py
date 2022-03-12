@@ -1,7 +1,10 @@
 import pygame
 import random
+import time;
 
-## Krt ei toimi
+
+c = [255,0,0]
+vt = 10 # Värvi muutumise kiirus
 
 class Game:
     def __init__(self):
@@ -30,6 +33,9 @@ class Game:
         self.state = "ingame"
         self.end_surface = pygame.Surface(self.window_size)
         self.end_surface.fill((255, 0, 0))
+        #############################
+        self.cycle = 0
+        #############################
 
         
 
@@ -101,6 +107,52 @@ class Game:
         if self.y2 > self.wy - 10:
             self.y2 = 0
 
+################################## Ei puutu, eravaldus
+
+
+        if(self.cycle==0): ## Suurenda teist väärtust
+            c[1] += vt
+            if(c[1] >= 255):
+                c[1] = 255
+                self.cycle=1
+        elif(self.cycle==1): ## Hakka esimest väärtust vähendama
+            c[0] -=vt
+            if(c[0] <=0):
+                c[0] = 0
+                self.cycle=2
+        elif(self.cycle==2): ## Hakka viimast väärtust suurendama
+            c[2] +=vt
+            if(c[2] >=255):
+                c[2] = 255
+                self.cycle=3
+        elif(self.cycle==3): ## Hakka teist väärtust vähendama
+            c[1] -=vt
+            if(c[1] <=0):
+                c[1] = 0
+                self.cycle=4
+        elif(self.cycle==4): ## Hakka esimest väärtust vähendama
+            c[0] +=vt
+            if(c[0] >=255):
+                c[0] = 255
+                self.cycle=5
+        elif(self.cycle==5): ## Hakka esimest väärtust vähendama
+            c[2] -=vt
+            if(c[2] <= 0):
+                c[2] = 0
+                self.cycle=0
+
+
+
+
+
+
+
+
+
+
+
+###################################
+
         print(self.x, self.y, "VS", self.x2, self.y2)   #Some debug code
         if abs((self.y - self.y2)) < 70 and abs((self.x - self.x2)) < 70:
             self.state = "gameover"
@@ -115,8 +167,8 @@ class Game:
 
     def render(self):
         self.window.fill((51, 0, 0))
-        pygame.draw.rect(self.window, (self.color[0], self.color[1], self.color[2]), (self.x, self.y, 40, 40))                  #Draw P1
-        pygame.draw.rect(self.window, (255-self.color[0], 255-self.color[1], 255-self.color[2]), (self.x2, self.y2, 40, 40))    #And P2
+        pygame.draw.rect(self.window, (c[0], c[1], c[2]), (self.x, self.y, 40, 40))                  #Draw P1
+        pygame.draw.rect(self.window, (255-c[0], 255-c[1], 255-c[2]), (self.x2, self.y2, 40, 40))    #And P2
 
         if self.state == "gameover":
             self.end_surface.set_alpha(self.end_counter)    #Render endscreen I think
