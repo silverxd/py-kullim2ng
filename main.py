@@ -5,7 +5,7 @@ class Game:
     def __init__(self):
         pygame.init()
         self.window = pygame.display.set_mode((1900, 1050), 
-                                 pygame.RESIZABLEpip)
+                                 pygame.RESIZABLE)
         self.clock = pygame.time.Clock()
         self.x, self.y = 120, self.wy/2
         self.running = True
