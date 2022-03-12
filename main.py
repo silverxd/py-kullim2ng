@@ -108,13 +108,13 @@ class Game:
             self.moveY = -10
 
         if self.y2 < 0:                 # P2 logic
-            self.y2 = self.wy - 10
-        if self.x2 > self.wx - 10:      # Doesn't seem to have the "bounce"
-            self.x2 = 0                 # behavior yet?
+            self.moveY2 = 10
+        if self.x2 > self.wx - 40:
+            self.moveX2 = -10
         if self.x2 < 0:
-            self.x2 = self.wx - 10
-        if self.y2 > self.wy - 10:
-            self.y2 = 0
+            self.moveX2 = 10
+        if self.y2 > self.wy - 40:
+            self.moveY2 = -10
 
 ################################## Ei puutu
 
