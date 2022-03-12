@@ -3,13 +3,15 @@ import random
 import time;
 
 
+
 c = [255,0,0]
-vt = 10 # Värvi muutumise kiirus
+vt = 400 # Värvi muutumise kiirus
+vv = 40  # Mängijate muutumise kiirus
 
 class Game:
     def __init__(self):
         pygame.init()                                               #Thank you for the base "engine" code @blimly & @Gorane7 <3
-        
+        self.t0 = time.time()
         self.window_size = (640, 480)
         self.window = pygame.display.set_mode((self.window_size), 
                                  pygame.RESIZABLE)                  #MIND BLOWN
@@ -40,11 +42,18 @@ class Game:
         
 
     def event(self):
+
+        #################
+        t1 = time.time()
+        dt = (t1-self.t0) # Kiiremini värve vahetada
+        print(dt)
+        self.t0 = t1
+        #################
         event_list = pygame.event.get()
-        self.x += self.moveX
-        self.y += self.moveY
-        self.x2 += self.moveX2                  #This is absolutely genius!
-        self.y2 += self.moveY2
+        self.x += self.moveX*vv*dt
+        self.y += self.moveY*vv*dt
+        self.x2 += self.moveX2*vv*dt                  #This is absolutely genius!
+        self.y2 += self.moveY2*vv*dt
         self.color[0] = random.randint(0, 255)     #Will replace by smooth RGB fade later 
         self.color[1] = random.randint(0, 255)
         self.color[2] = random.randint(0, 255)
@@ -90,13 +99,13 @@ class Game:
                    self.moveY2 =- 20
 
         if self.y < 0 :                 #P1 logic
-            self.y = self.wy - 10
-        if self.x > self.wx - 10:
-            self.x = 0
+            self.moveY = 10
+        if self.x > self.wx - 40:
+            self.moveX = -10
         if self.x < 0:
-            self.x = self.wx - 10
-        if self.y > self.wy - 10:
-            self.y = 0
+            self.moveX = 10
+        if self.y > self.wy - 40:
+            self.moveY = -10
 
         if self.y2 < 0:                 #P2 logic
             self.y2 = self.wy - 10
@@ -107,36 +116,36 @@ class Game:
         if self.y2 > self.wy - 10:
             self.y2 = 0
 
-################################## Ei puutu, eravaldus
+################################## Ei puutu
 
 
         if(self.cycle==0): ## Suurenda teist väärtust
-            c[1] += vt
+            c[1] += vt*dt
             if(c[1] >= 255):
                 c[1] = 255
                 self.cycle=1
         elif(self.cycle==1): ## Hakka esimest väärtust vähendama
-            c[0] -=vt
+            c[0] -= vt*dt
             if(c[0] <=0):
                 c[0] = 0
                 self.cycle=2
         elif(self.cycle==2): ## Hakka viimast väärtust suurendama
-            c[2] +=vt
+            c[2] += vt*dt
             if(c[2] >=255):
                 c[2] = 255
                 self.cycle=3
         elif(self.cycle==3): ## Hakka teist väärtust vähendama
-            c[1] -=vt
+            c[1] -= vt*dt
             if(c[1] <=0):
                 c[1] = 0
                 self.cycle=4
         elif(self.cycle==4): ## Hakka esimest väärtust vähendama
-            c[0] +=vt
+            c[0] += vt*dt
             if(c[0] >=255):
                 c[0] = 255
                 self.cycle=5
         elif(self.cycle==5): ## Hakka esimest väärtust vähendama
-            c[2] -=vt
+            c[2] -= vt*dt
             if(c[2] <= 0):
                 c[2] = 0
                 self.cycle=0
@@ -153,7 +162,6 @@ class Game:
 
 ###################################
 
-        print(self.x, self.y, "VS", self.x2, self.y2)   #Some debug code
         if abs((self.y - self.y2)) < 70 and abs((self.x - self.x2)) < 70:
             self.state = "gameover"
 
