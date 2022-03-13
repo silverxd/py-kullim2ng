@@ -7,9 +7,9 @@ estimatedFps = 2000
 c = [255,0,0]
 vt = 400 # Värvi muutumise kiirus
 vv = 40  # Mängijate muutumise kiirus
-
 class Game:
     def __init__(self):
+        self.cycle = 0
         pygame.init()                                               # Thank you for the base "engine" code @blimly & @Gorane7 <3
         self.t0 = time.time()
         self.window_size = (640, 480)
@@ -142,51 +142,19 @@ class Game:
         if self.y2 > self.wy - 60:
             self.moveY2 = -10
 
+        #######
+        s = self.cycle ## Mälu kokkuhoid :D
+    
 ################################## Ei puutu
 
 
-        if(self.cycle==0): ## Suurenda teist väärtust
-            c[1] += vt*dt
-            if(c[1] >= 255):
-                c[1] = 255
-                self.cycle=1
-        elif(self.cycle==1): ## Hakka esimest väärtust vähendama
-            c[0] -= vt*dt
-            if(c[0] <=0):
-                c[0] = 0
-                self.cycle=2
-        elif(self.cycle==2): ## Hakka viimast väärtust suurendama
-            c[2] += vt*dt
-            if(c[2] >=255):
-                c[2] = 255
-                self.cycle=3
-        elif(self.cycle==3): ## Hakka teist väärtust vähendama
-            c[1] -= vt*dt
-            if(c[1] <=0):
-                c[1] = 0
-                self.cycle=4
-        elif(self.cycle==4): ## Hakka esimest väärtust vähendama
-            c[0] += vt*dt
-            if(c[0] >=255):
-                c[0] = 255
-                self.cycle=5
-        elif(self.cycle==5): ## Hakka esimest väärtust vähendama
-            c[2] -= vt*dt
-            if(c[2] <= 0):
-                c[2] = 0
-                self.cycle=0
-
-        
-
-
-
-
-
-
-
-
-
+        c[[1,0,2][s%3]]+=dt*vt*(1-2*(s%2))
+        if(c[[1,0,2][s%3]]>=255 or c[[1,0,2][s%3]]<0):
+            c[[1,0,2][s%3]]=255*(1-s%2)
+            s=(s+1)%6
 ###################################
+        self.cycle = s
+        ########
 
         if abs((self.y - self.y2)) < 40 and abs((self.x - self.x2)) < 40:   # INSANE COLLISION TESTER
             self.state = "gameover"
