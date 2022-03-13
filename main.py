@@ -19,14 +19,14 @@ class Game:
 
         self.wx, self.wy = pygame.display.get_surface().get_size()  # Get window resolution
 
-        self.x, self.y = 120, self.wy/2            # Scalable starting position
+        self.x, self.y = self.wx - 120,self.wy/2 # "I am proud of this" -silver
         self.running = True
         self.fpsCount = True
         self.moveX = 0                             # Initialize some values
         self.moveY = 0
         self.color = [100, 100, 100]
 
-        self.x2, self.y2 = self.wx - 120,self.wy/2 # "I am proud of this" -silver
+        self.x2, self.y2 = 120, self.wy/2            # Scalable starting position
 
         self.moveX2 = 0
         self.moveY2 = 0
