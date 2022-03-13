@@ -18,8 +18,9 @@ We decided to use [an amazing base](https://github.com/blimly/python_koolitus/bl
 - [ ] Add a timer
 - [ ] Calculate score for each player
 - [ ] Proper endscreen
+- [ ] Add audio
 - [ ] Add bots/AI/single player mode
 - [ ] Add online multiplayer
-- [ ] Join TalTech :P
+- [ ] Join TalTech :D
 
 <!-- https://pastebin.com/7y9g0sBS a very old copy of the game, only here as a backup / bookmark of sorts. -->
