@@ -96,10 +96,13 @@ class Game:
 
             if event.type == pygame.VIDEORESIZE:
                 self.wx, self.wy = pygame.display.get_surface().get_size()
+                self.end_surface = pygame.Surface(self.window_size)                             # broken endscreen fix
+                self.end_surface.fill((255, 0, 0))
                 if self.moveX == 0 and self.moveY == 0 and self.moveX2 == 0 and self.moveY2 == 0:   # If window is resized and there
                     self.x2, self.y2 = 120, self.wy/2                                               # is no movement yet, move the
-                    self.x, self.y = self.wx - 120,self.wy/2                                        # players to the edge of the new
-                                                                                                    # window
+                    self.x, self.y = self.wx - 120,self.wy/2                                        # players to the edge of the new windpw
+                    
+
             if event.type == pygame.QUIT:
                 self.running = False
                 break
