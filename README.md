@@ -1,6 +1,6 @@
 # py-kullim2ng
 Kullimäng created by Silver and Rascy @ init2022<br />
-Based on PyGame<br />
+Powered by PyGame<br />
 We decided to use [an amazing base](https://github.com/blimly/python_koolitus/blob/checkpoint1-game-loop/main.py) by [@blimly](https://github.com/blimly/) for the main engine and just build our own vision from there because we had nothing better to do haha
 ## Project status
 
