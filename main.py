@@ -142,7 +142,7 @@ class Game:
         if self.y2 > self.wy - 60:
             self.moveY2 = -10
 
-        #######
+        ########
         s = self.cycle ## Mälu kokkuhoid :D
     
 ################################## Ei puutu
