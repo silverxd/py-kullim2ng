@@ -1,4 +1,4 @@
-self.end_surface = pygame.Surface((self.wx, self.wy))  import pygame
+import pygame
 import random
 import time;
 import math
