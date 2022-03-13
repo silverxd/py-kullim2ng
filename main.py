@@ -1,9 +1,9 @@
 import pygame
 import random
 import time;
+import math
 
-
-#adwwd
+estimatedFps = 2000
 c = [255,0,0]
 vt = 400 # Värvi muutumise kiirus
 vv = 40  # Mängijate muutumise kiirus
@@ -13,15 +13,15 @@ class Game:
         pygame.init()                                               # Thank you for the base "engine" code @blimly & @Gorane7 <3
         self.t0 = time.time()
         self.window_size = (640, 480)
-        self.window = pygame.display.set_mode((self.window_size), 
-                                 pygame.RESIZABLE)                  # MIND BLOWN
+        self.window = pygame.display.set_mode((self.window_size), pygame.RESIZABLE)                  # MIND BLOWN
+        pygame.display.set_caption("Kullimang V.0.0")
         self.clock = pygame.time.Clock()
 
         self.wx, self.wy = pygame.display.get_surface().get_size()  # Get window resolution
 
         self.x, self.y = 120, self.wy/2            # Scalable starting position
         self.running = True
-
+        self.fpsCount = True
         self.moveX = 0                             # Initialize some values
         self.moveY = 0
         self.color = [100, 100, 100]
@@ -30,13 +30,20 @@ class Game:
 
         self.moveX2 = 0
         self.moveY2 = 0
-
+        
         self.end_counter = 0
         self.state = "ingame"
         self.end_surface = pygame.Surface(self.window_size)
         self.end_surface.fill((255, 0, 0))
+        self.font = pygame.font.Font('freesansbold.ttf', 32)
         #############################
         self.cycle = 0
+        self.fpsTimes = []
+        for i in range(estimatedFps):
+            self.fpsTimes.append(estimatedFps)
+
+        self.fpsText = ""
+
         #############################
 
         
@@ -46,8 +53,14 @@ class Game:
         #################
         t1 = time.time()
         dt = (t1-self.t0) # Kiiremini värve vahetada
-        print(dt)
+        
         self.t0 = t1
+
+        self.fpsText = ""
+        if self.fpsCount:
+            self.fpsTimes.pop()
+            self.fpsTimes.insert(0, math.floor(1/dt))
+            self.fpsText = str(math.floor(sum(self.fpsTimes)/len(self.fpsTimes)))
         #################
         event_list = pygame.event.get()
         self.x += self.moveX*vv*dt
@@ -62,6 +75,8 @@ class Game:
                 self.running = False
                 break
             elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_f:
+                    self.fpsCount ^=True
                 if event.key == pygame.K_ESCAPE:
                     self.running = False
                     break
@@ -150,7 +165,7 @@ class Game:
                 c[2] = 0
                 self.cycle=0
 
-
+        
 
 
 
@@ -177,6 +192,9 @@ class Game:
         self.window.fill((51, 0, 0))
         pygame.draw.rect(self.window, (c[0], c[1], c[2]), (self.x, self.y, 40, 40))                  # Draw P1
         pygame.draw.rect(self.window, (255-c[0], 255-c[1], 255-c[2]), (self.x2, self.y2, 40, 40))    # And P2, with opposite colors
+        self.window.blit(self.font.render(self.fpsText, True, (255,0,0), (0,0,255)), (10,10))
+
+        
 
         if self.state == "gameover":
             self.end_surface.set_alpha(self.end_counter)    # Render endscreen I think
@@ -189,7 +207,7 @@ class Game:
             self.event()
             self.update()
             self.render()
-            self.clock.tick(60)     # BAD BAD BAD BAD BAD BAD BAD BAD
+            #self.clock.tick(300)     # BAD BAD BAD BAD BAD BAD BAD BAD
 
 
 if __name__ == '__main__':      # I honestly have no clue what this does
