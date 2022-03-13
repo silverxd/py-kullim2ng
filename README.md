@@ -14,7 +14,7 @@ We decided to use [an amazing base](https://github.com/blimly/python_koolitus/bl
 - [x] Introduce better colors
 - [x] Replace "teleport" with "bounce" to make it more unique
 - [ ] Make everything look prettier
-- [ ] Uncap framerate (delta time?)
+- [x] Uncap framerate (delta time?)
 - [ ] Add a timer
 - [ ] Calculate score for each player
 - [ ] Proper endscreen
