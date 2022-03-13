@@ -222,7 +222,7 @@ class Game:
             self.event()
             self.update()
             self.render()
-            #self.clock.tick(300)     # BAD BAD BAD BAD BAD BAD BAD BAD
+            self.clock.tick(500)     # 500 is the magic number
 
 
 if __name__ == '__main__':      # I honestly have no clue what this does
