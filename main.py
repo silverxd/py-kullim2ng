@@ -93,6 +93,10 @@ class Game:
                    self.moveX = 0
                    self.moveY =- 20
         for event in event_list:            # If in doubt, just double use the function and hope for the best LOL
+
+            if event.type == pygame.VIDEORESIZE:
+                self.wx, self.wy = pygame.display.get_surface().get_size()
+
             if event.type == pygame.QUIT:
                 self.running = False
                 break
