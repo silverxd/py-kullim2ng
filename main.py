@@ -3,7 +3,7 @@ import random
 import time;
 
 
-
+#adwwd
 c = [255,0,0]
 vt = 400 # Värvi muutumise kiirus
 vv = 40  # Mängijate muutumise kiirus
