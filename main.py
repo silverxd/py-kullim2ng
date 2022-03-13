@@ -96,7 +96,10 @@ class Game:
 
             if event.type == pygame.VIDEORESIZE:
                 self.wx, self.wy = pygame.display.get_surface().get_size()
-
+                if self.moveX == 0 and self.moveY == 0 and self.moveX2 == 0 and self.moveY2 == 0:   # If window is resized and there
+                    self.x2, self.y2 = 120, self.wy/2                                               # is no movement yet, move the
+                    self.x, self.y = self.wx - 120,self.wy/2                                        # players to the edge of the new
+                                                                                                    # window
             if event.type == pygame.QUIT:
                 self.running = False
                 break
