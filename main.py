@@ -69,7 +69,7 @@ class Game:
         self.x2 += self.moveX2*vv*dt                  # This is absolutely genius!
         self.y2 += self.moveY2*vv*dt
         #self.color[0] = random.randint(0, 255)     # Will replace by smooth RGB fade later 
-        #self.color[1] = random.randint(0, 255)     # Replace finished!
+        #self.color[1] = random.randint(0, 255)     # "If in doubt, use random.randomint()™️"
         #self.color[2] = random.randint(0, 255)
         for event in event_list:
             if event.type == pygame.QUIT:
