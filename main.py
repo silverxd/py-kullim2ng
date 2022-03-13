@@ -117,22 +117,22 @@ class Game:
                    self.moveX2 = 0
                    self.moveY2 =- 20
 
-        if self.y < 0 :                 # P1 logic
+        if self.y < 20 :                 # P1 logic
             self.moveY = 10             # Used to be here to teleport player
-        if self.x > self.wx - 40:       # to the other side of the window upon
+        if self.x > self.wx - 60:       # to the other side of the window upon
             self.moveX = -10            # reaching the end, but was replaced
-        if self.x < 0:                  # by an epic BOUNCE function.
+        if self.x < 20:                  # by an epic BOUNCE function.
             self.moveX = 10
-        if self.y > self.wy - 40:
+        if self.y > self.wy - 60:
             self.moveY = -10
 
-        if self.y2 < 0:                 # P2 logic
+        if self.y2 < 20:                 # P2 logic
             self.moveY2 = 10
-        if self.x2 > self.wx - 40:
+        if self.x2 > self.wx - 60:
             self.moveX2 = -10
-        if self.x2 < 0:
+        if self.x2 < 20:
             self.moveX2 = 10
-        if self.y2 > self.wy - 40:
+        if self.y2 > self.wy - 60:
             self.moveY2 = -10
 
 ################################## Ei puutu
@@ -189,13 +189,15 @@ class Game:
         pass
         if self.state == "gameover":        # Budget endscreen logic
             self.end_counter += 10
-            if self.end_counter >= 200:
-                self.running = False
+            #if self.end_counter >= 200:    # What if we just comment this out lol
+            #    self.running = False
 
     def render(self):
         self.window.fill((51, 0, 0))
-        pygame.draw.rect(self.window, (c[0], c[1], c[2]), (self.x, self.y, 40, 40))                  # Draw P1
-        pygame.draw.rect(self.window, (255-c[0], 255-c[1], 255-c[2]), (self.x2, self.y2, 40, 40))    # And P2, with opposite colors
+        pygame.draw.rect(self.window, (255, 0, 0), (self.x, self.y, 40, 40))                  # Draw P1
+        pygame.draw.rect(self.window, (0, 0, 255), (self.x2, self.y2, 40, 40))    # And P2, with opposite colors
+        pygame.draw.rect(self.window, (c[0], c[1], c[2]),
+                 [0, 0, self.wx, self.wy], 20)
         self.window.blit(self.font.render(self.fpsText, True, (255,0,0), (0,0,255)), (10,10))
 
         
