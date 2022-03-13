@@ -36,6 +36,7 @@ class Game:
         self.end_surface = pygame.Surface(self.window_size)
         self.end_surface.fill((255, 0, 0))
         self.font = pygame.font.Font('freesansbold.ttf', 32)
+        self.gameovertext = self.font.render('GAME OVER!', True, (255, 255, 255))
         #############################
         self.cycle = 0
         self.fpsTimes = []
@@ -211,6 +212,8 @@ class Game:
         if self.state == "gameover":
             self.end_surface.set_alpha(self.end_counter)    # Render endscreen I think
             self.window.blit(self.end_surface, (0, 0))
+            if self.end_counter >= 200:
+                self.window.blit(self.gameovertext, self.gameovertext.get_rect(center = self.window.get_rect().center))
 
         pygame.display.update()
 
