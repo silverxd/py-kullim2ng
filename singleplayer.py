@@ -27,7 +27,8 @@ class Game:
         self.moveY = 0
         self.color = [100, 100, 100]
 
-        
+        self.playersize = 40
+        self.collisiondist = 45
         self.end_counter = 0
         self.state = "ingame"
         self.end_surface = pygame.Surface(self.window_size)
@@ -65,7 +66,7 @@ class Game:
         #################
         event_list = pygame.event.get()
         self.x += self.moveX*vv*dt                  # This is absolutely genius!
-        self.y += self.moveY*vv*dt
+        self.y += self.moveY*vv*dt                  # aga äkki peaks resolutioniga ka kuidagi läbi korrutama
        
         for event in event_list:
             if event.type == pygame.QUIT:
@@ -109,6 +110,12 @@ class Game:
                 self.end_surface.fill((255, 0, 0))                                                  # If window is resized and there
                 if self.moveX == 0 and self.moveY == 0:                                             # is no movement yet, move the
                     self.x, self.y = self.wx - 120,self.wy/2                                        # players to the edge of the new window
+                if self.wx > self.wy:
+                    self.playersize = (self.wy / 12)
+                elif self.wy > self.wx:
+                    self.playersize = (self.wx / 12)
+                else: self.playersize = (self.wx / 12)
+                self.collisiondist = self.playersize + 5
                     
 
         if self.y < 20 :                 # P1 logic
@@ -118,7 +125,7 @@ class Game:
             self.moveX = -10            # reaching the end, but was replaced
         if self.x < 20:                  # by an epic BOUNCE function.
             self.moveX = 10
-        if self.y > self.wy - 60:
+        if self.y > self.wy - 60:       # PRAEGU ON KATKI!!!!!!!!!!!
             self.moveY = -10
 
         if (self.x == self.wx - 120 and self.y == self.wy/2): # Ei teadnud kuidas teistpidi pöörata.
@@ -160,7 +167,7 @@ class Game:
         ########
 
 
-        if abs((self.ballPos[1] - self.y)) < 50 and abs((self.ballPos[0] - self.x)) < 50:   # INSANE COLLISION TESTER
+        if abs((self.ballPos[1] - self.y)) < self.collisiondist and abs((self.ballPos[0] - self.x)) < self.collisiondist:   # INSANE COLLISION TESTER
             self.state = "gameover"
 
 
@@ -175,8 +182,8 @@ class Game:
 
     def render(self):
         self.window.fill((51, 0, 0))
-        pygame.draw.rect(self.window, (255, 0, 0), (self.x, self.y, 40, 40))                  # Draw P1
-        pygame.draw.circle(self.window, (c[0], c[1], c[2]), (self.ballPos[0],self.ballPos[1]), 20,10)
+        pygame.draw.rect(self.window, (255, 0, 0), (self.x, self.y, self.playersize, self.playersize))                  # Draw P1
+        pygame.draw.circle(self.window, (c[0], c[1], c[2]), (self.ballPos[0],self.ballPos[1]), self.playersize/2,10)
         pygame.draw.rect(self.window, (c[0], c[1], c[2]),
                  [0, 0, self.wx, self.wy], 20)
         self.window.blit(self.font.render(self.fpsText, True, (255,0,0), (0,0,255)), (10,10))
@@ -188,7 +195,7 @@ class Game:
             self.window.blit(self.end_surface, (0, 0))
             if self.end_counter >= 200:
                 self.window.blit(self.gameovertext, self.gameovertext.get_rect(center = self.window.get_rect().center))     # sketchy AF code but it works
-                self.window.blit(self.gameovertext2, (320 - self.gameovertext2.get_width() // 2, 240 - self.gameovertext2.get_height() // 2 + 30))  # same here
+                self.window.blit(self.gameovertext2, (320 - self.gameovertext2.get_width() // 2, 240 - self.gameovertext2.get_height() // 2 + 30))  # ok this only works for default window size, will fix later
 
             
 
