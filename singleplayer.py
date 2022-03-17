@@ -17,7 +17,7 @@ class Game:
         self.window = pygame.display.set_mode((self.window_size), pygame.RESIZABLE)                  # MIND BLOWN
         pygame.display.set_caption("Kullimang SINGLEPLAYER V.0.0")
         self.clock = pygame.time.Clock()
-
+        self.runningInt = 1
         self.wx, self.wy = pygame.display.get_surface().get_size()  # Get window resolution
 
         self.x, self.y = self.wx - 120,self.wy/2    # "I am proud of this" -silver
@@ -26,6 +26,7 @@ class Game:
         self.moveX = 0                             # Initialize some values
         self.moveY = 0
         self.color = [100, 100, 100]
+        self.score = 0
 
         self.playersize = 40
         self.collisiondist = 45
@@ -34,8 +35,7 @@ class Game:
         self.end_surface = pygame.Surface(self.window_size)
         self.end_surface.fill((255, 0, 0))
         self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.gameovertext = self.font.render('GAME OVER!', True, (255, 255, 255))
-        self.gameovertext2 = self.font.render('Press ENTER to play again!', True, (255, 255, 255))
+
         #############################
         self.cycle = 0
         self.fpsTimes = []
@@ -55,6 +55,7 @@ class Game:
         #################
         t1 = time.time()
         dt = (t1-self.t0) # Kiiremini värve vahetada
+        self.score += self.runningInt * dt
         
         self.t0 = t1
 
@@ -91,6 +92,8 @@ class Game:
                    self.moveX = 0
                    self.moveY =- 20
                 elif event.key == pygame.K_RETURN and self.state == "gameover":         #Äkki töötab?
+                        self.runningInt = 1
+                        self.score = 0
                         self.state = "ingame"
                         print("game not over")
                         self.end_counter = 0
@@ -191,11 +194,16 @@ class Game:
         
 
         if self.state == "gameover":
+            self.runningInt = 0
             self.end_surface.set_alpha(self.end_counter)    # Render endscreen I think
             self.window.blit(self.end_surface, (0, 0))
             if self.end_counter >= 200:
+                self.scoreText = self.font.render("Score : " + str(math.floor(self.score)), True, (255, 255, 255))
+                self.gameovertext = self.font.render('GAME OVER!', True, (255, 255, 255))
+                self.gameovertext2 = self.font.render('Press ENTER to play again!', True, (255, 255, 255))
+                self.window.blit(self.scoreText, ((self.wx  - self.scoreText.get_width()) / 2, 240 - self.scoreText.get_height() // 2 - 60))     # sketchy AF code but it works
                 self.window.blit(self.gameovertext, self.gameovertext.get_rect(center = self.window.get_rect().center))     # sketchy AF code but it works
-                self.window.blit(self.gameovertext2, (320 - self.gameovertext2.get_width() // 2, 240 - self.gameovertext2.get_height() // 2 + 30))  # ok this only works for default window size, will fix later
+                self.window.blit(self.gameovertext2, ((self.wx - self.gameovertext2.get_width()) / 2, 240 - self.gameovertext2.get_height() // 2 + 30))  # ok this only works for default window size, will fix later
 
             
 
