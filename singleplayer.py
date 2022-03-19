@@ -142,17 +142,17 @@ class Game:
 
 
 
-        if(self.ballPos[0] < 30):
-            self.ballPos[0] = 30
+        if(self.ballPos[0] < 10+self.playersize/2):
+            self.ballPos[0] = 10+self.playersize/2
             self.ballDir[0] *= -1
-        if(self.ballPos[0] > self.wx-30):
-            self.ballPos[0] = self.wx-30
+        if(self.ballPos[0] > self.wx-(10+self.playersize/2)):
+            self.ballPos[0] = self.wx-(10+self.playersize/2)
             self.ballDir[0] *= -1
-        if(self.ballPos[1] < 30):
-            self.ballPos[1] = 30
+        if(self.ballPos[1] < 10+self.playersize/2):
+            self.ballPos[1] = 10+self.playersize/2
             self.ballDir[1] *= -1
-        if(self.ballPos[1] > self.wy-30):
-            self.ballPos[1] = self.wy-30
+        if(self.ballPos[1] > self.wy-(10+self.playersize/2)):
+            self.ballPos[1] = self.wy-(10+self.playersize/2)
             self.ballDir[1] *= -1
             
         ########
