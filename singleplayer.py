@@ -20,12 +20,11 @@ class Game:
         self.soundTrack = pygame.mixer.Sound("epic.mp3")
         self.bounce = pygame.mixer.Sound("playerBounce.wav")
 
-        self.vb = 100
         self.cycle = 0
         self.t0 = time.time()
         self.window_size = (640, 480)
         self.window = pygame.display.set_mode((self.window_size), pygame.RESIZABLE)  # MIND BLOWN
-        pygame.display.set_caption("Kullimang SINGLEPLAYER V.0.0")
+        pygame.display.set_caption("Kullimang SINGLEPLAYER V.0.1")
         self.clock = pygame.time.Clock()
         self.runningInt = 1
         self.wx, self.wy = pygame.display.get_surface().get_size()  # Get window resolution
@@ -156,28 +155,32 @@ class Game:
 
         if (self.ballPos[0] < 10 + self.playersize / 2):
             pygame.mixer.Sound.play(self.bounce)
-            self.ballDir[0] = random.randint(-100, 100) + random.choice([-2, 2])
+            self.ballDir[0] = random.randint(-100, 100)
             self.ballPos[0] = 10 + self.playersize / 2
             self.ballDir[0] *= -1
         
         if (self.ballPos[0] > self.wx - (10 + self.playersize / 2)):
             pygame.mixer.Sound.play(self.bounce)
-            self.ballDir[0] = random.randint(-100, 100) + random.choice([-2, 2])
+            self.ballDir[0] = random.randint(-100, 100)
             self.ballPos[0] = self.wx - (10 + self.playersize / 2)
             self.ballDir[0] *= -1
 
         if (self.ballPos[1] < 10 + self.playersize / 2):
             pygame.mixer.Sound.play(self.bounce)
-            self.ballDir[1] = random.randint(-100, 100) + random.choice([-2, 2])
+            self.ballDir[1] = random.randint(-100, 100)
             self.ballPos[1] = 10 + self.playersize / 2
             self.ballDir[1] *= -1
 
         if (self.ballPos[1] > self.wy - (10 + self.playersize / 2)):
             pygame.mixer.Sound.play(self.bounce)
-            self.ballDir[1] = random.randint(-100, 100) +  random.choice([-2, 2])
+            self.ballDir[1] = random.randint(-100, 100)
             self.ballPos[1] = self.wy - (10 + self.playersize / 2)
             self.ballDir[1] *= -1
-
+            
+        if abs(self.ballDir[0]) < 5:
+            self.ballDir[0] = random.randint(-100, 100)
+        if abs(self.ballDir[1]) < 5:
+            self.ballDir[1] = random.randint(-100, 100)
 
         ########
         s = self.cycle
@@ -237,7 +240,7 @@ class Game:
             self.event()
             self.update()
             self.render()
-            self.clock.tick(480)  # 500 is NOT the magic number
+            self.clock.tick(450)  # 500 is NOT the magic number
 
 
 if __name__ == '__main__':  # I learned that this runs the game itself!
