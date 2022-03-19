@@ -29,7 +29,6 @@ class Game:
         self.score = 0
 
         self.playersize = 40
-        self.collisiondist = 45
         self.end_counter = 0
         self.state = "ingame"
         self.end_surface = pygame.Surface(self.window_size)
@@ -119,7 +118,7 @@ class Game:
                 elif self.wy > self.wx:
                     self.playersize = (self.wx / 12)
                 else: self.playersize = (self.wx / 12)
-                self.collisiondist = self.playersize + 5
+
                     
 
         if self.y < 20:                                 # Põrke loogika
@@ -170,7 +169,7 @@ class Game:
         ########
 
 
-        if abs((self.ballPos[1] - self.y)) < self.collisiondist and abs((self.ballPos[0] - self.x)) < self.collisiondist:   # INSANE COLLISION TESTER
+        if abs((self.ballPos[1] - self.y)) < self.playersize + 5 and abs((self.ballPos[0] - self.x)) < self.playersize + 5:   # INSANE COLLISION TESTER
             self.state = "gameover"
 
 
@@ -219,7 +218,7 @@ class Game:
 
 
 
-if __name__ == '__main__':      # I honestly have no clue what this does
+if __name__ == '__main__':      # I learned that this runs the game itself!
     game = Game()
     game.run()
     pygame.quit()
