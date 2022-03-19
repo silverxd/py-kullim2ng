@@ -15,9 +15,10 @@ We decided to use [an amazing base](https://github.com/blimly/python_koolitus/bl
 - [x] Replace "teleport" with "bounce" to make it more unique
 - [ ] Make everything look prettier
 - [x] Uncap framerate (delta time?)
-- [ ] Add a timer
-- [ ] Calculate score for each player
-- [ ] Proper endscreen
+- [ ] Add a timer (Successfully implemented for singleplayer)
+- [ ] Calculate score for each player (Successfully implemented for singleplayer)
+- [ ] Proper endscreen (Successfully implemented for singleplayer)
+- [ ] Fix collision detector
 - [ ] Add audio
 - [x] Add bots/AI/single player mode
 - [ ] Add online multiplayer
