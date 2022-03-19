@@ -190,10 +190,10 @@ class Game:
             self.event()
             self.update()
             self.render()
-            self.clock.tick(500)     # 500 is the magic number
+            self.clock.tick(480)     # 500 is NOT the magic number
 
 
-if __name__ == '__main__':      # I honestly have no clue what this does
+if __name__ == '__main__':      # run the game!
     game = Game()
     game.run()
     pygame.quit()
