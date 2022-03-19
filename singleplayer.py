@@ -134,8 +134,8 @@ class Game:
         if (self.x == self.wx - 120 and self.y == self.wy/2): # Ei teadnud kuidas teistpidi pöörata.
             print()
         else:
-            self.ballPos[0] += self.ballDir[0]*dt*self.vb/10
-            self.ballPos[1] += self.ballDir[1]*dt*self.vb/10
+            self.ballPos[0] += self.ballDir[0]*dt*self.vb/10*self.playersize/40
+            self.ballPos[1] += self.ballDir[1]*dt*self.vb/10*self.playersize/40
 
         self.ballDir[0] += dt
         self.ballDir[1] += dt
