@@ -129,16 +129,16 @@ class Game:
 
         if self.y < 20:  # Põrke loogika
             pygame.mixer.Sound.play(self.bounce)
-            self.moveY = 10
+            self.moveY = self.playersize / 4
         if self.x > self.wx - 20 - self.playersize:
             pygame.mixer.Sound.play(self.bounce)
-            self.moveX = -10
+            self.moveX = -self.playersize / 4
         if self.x < 20:
             pygame.mixer.Sound.play(self.bounce)
-            self.moveX = 10
+            self.moveX = self.playersize / 4
         if self.y > self.wy - 20 - self.playersize:
             pygame.mixer.Sound.play(self.bounce)
-            self.moveY = -10
+            self.moveY = -self.playersize / 4
 
 
         print("Dir : ", self.ballDir)
