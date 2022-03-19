@@ -20,6 +20,7 @@ class Game:
         self.soundTrack = pygame.mixer.Sound("epic.mp3")
         self.bounce = pygame.mixer.Sound("playerBounce.wav")
 
+        self.vb = 100
         self.cycle = 0
         self.t0 = time.time()
         self.window_size = (640, 480)
@@ -120,7 +121,12 @@ class Game:
                 self.end_surface.fill((255, 0, 0))  # If window is resized and there
                 if self.moveX == 0 and self.moveY == 0:  # is no movement yet, move the
                     self.x, self.y = self.wx - 120, self.wy / 2  # players to the edge of the new window
-
+                    self.ballPos = [self.playersize+10, self.playersize+10]
+                if self.wx > self.wy:
+                    self.playersize = (self.wy / 12)
+                elif self.wy > self.wx:
+                    self.playersize = (self.wx / 12)
+                else: self.playersize = (self.wx / 12)
 
         if self.y < 20:  # Põrke loogika
             pygame.mixer.Sound.play(self.bounce)
@@ -145,31 +151,31 @@ class Game:
             self.ballSpeed += dt*100
             totalSpeed = math.sqrt(self.ballDir[0]**2 + self.ballDir[1]**2)
             speed = self.ballSpeed / (totalSpeed+1)
-            self.ballPos[0] += self.ballDir[0] * dt * speed
-            self.ballPos[1] += self.ballDir[1] * dt * speed
+            self.ballPos[0] += self.ballDir[0] * dt * speed * self.playersize / 40
+            self.ballPos[1] += self.ballDir[1] * dt * speed * self.playersize / 40
 
-        if self.ballPos[0] < 30:
+        if (self.ballPos[0] < 10 + self.playersize / 2):
             pygame.mixer.Sound.play(self.bounce)
             self.ballDir[0] = random.randint(-100, 100) + random.choice([-2, 2])
-
-            self.ballPos[0] = 30
+            self.ballPos[0] = 10 + self.playersize / 2
             self.ballDir[0] *= -1
-        if self.ballPos[0] > self.wx - 30:
+        
+        if (self.ballPos[0] > self.wx - (10 + self.playersize / 2)):
             pygame.mixer.Sound.play(self.bounce)
             self.ballDir[0] = random.randint(-100, 100) + random.choice([-2, 2])
-            self.ballPos[0] = self.wx - 30
+            self.ballPos[0] = self.wx - (10 + self.playersize / 2)
             self.ballDir[0] *= -1
 
-        if self.ballPos[1] < 30:
+        if (self.ballPos[1] < 10 + self.playersize / 2):
             pygame.mixer.Sound.play(self.bounce)
             self.ballDir[1] = random.randint(-100, 100) + random.choice([-2, 2])
-            self.ballPos[1] = 30
+            self.ballPos[1] = 10 + self.playersize / 2
             self.ballDir[1] *= -1
 
-        if self.ballPos[1] > self.wy - 30:
+        if (self.ballPos[1] > self.wy - (10 + self.playersize / 2)):
             pygame.mixer.Sound.play(self.bounce)
             self.ballDir[1] = random.randint(-100, 100) +  random.choice([-2, 2])
-            self.ballPos[1] = self.wy - 30
+            self.ballPos[1] = self.wy - (10 + self.playersize / 2)
             self.ballDir[1] *= -1
 
 
@@ -219,9 +225,9 @@ class Game:
                 self.window.blit(self.scoreText, ((self.wx - self.scoreText.get_width()) / 2,
                                                   240 - self.scoreText.get_height() / 2 - 30))  # sketchy AF code but it works
                 self.window.blit(self.gameovertext, ((self.wx - self.gameovertext.get_width()) / 2,
-                                                     240 - self.gameovertext.get_height() / 2))  # sketchy AF code but it works
+                                                     240 - self.gameovertext.get_height() / 2))  # more sketchy code
                 self.window.blit(self.gameovertext2, ((self.wx - self.gameovertext2.get_width()) / 2,
-                                                      240 - self.gameovertext2.get_height() / 2 + 30))  # ok this only works for default window size, will fix later
+                                                      240 - self.gameovertext2.get_height() / 2 + 30))  
 
         pygame.display.update()
 
