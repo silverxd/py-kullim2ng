@@ -19,7 +19,7 @@ We decided to use [an amazing base](https://github.com/blimly/python_koolitus/bl
 - [ ] Calculate score for each player (Successfully implemented for singleplayer)
 - [ ] Proper endscreen (Successfully implemented for singleplayer)
 - [ ] Fix collision detector
-- [ ] Add audio
+- [ ] Add audio (Successfully implemented for singleplayer)
 - [x] Add bots/AI/single player mode
 - [ ] Add online multiplayer
 - [ ] Join TalTech :D
