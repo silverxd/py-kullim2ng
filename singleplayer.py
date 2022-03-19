@@ -226,11 +226,11 @@ class Game:
                 self.gameovertext = self.font.render('SEPPO NO MOOR!', True, (255, 255, 255))
                 self.gameovertext2 = self.font.render('Press ENTER to play again!', True, (255, 255, 255))
                 self.window.blit(self.scoreText, ((self.wx - self.scoreText.get_width()) / 2,
-                                                  240 - self.scoreText.get_height() / 2 - 30))  # sketchy AF code but it works
+                                                  (self.wy - self.scoreText.get_height()) / 2 - 30))  # sketchy AF code but it works
                 self.window.blit(self.gameovertext, ((self.wx - self.gameovertext.get_width()) / 2,
-                                                     240 - self.gameovertext.get_height() / 2))  # more sketchy code
+                                                     (self.wy - self.gameovertext.get_height()) / 2))  # more sketchy code
                 self.window.blit(self.gameovertext2, ((self.wx - self.gameovertext2.get_width()) / 2,
-                                                      240 - self.gameovertext2.get_height() / 2 + 30))  
+                                                      (self.wy - self.gameovertext2.get_height()) / 2 + 30))  
 
         pygame.display.update()
 
