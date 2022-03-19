@@ -66,8 +66,8 @@ class Game:
             self.fpsText = str(math.floor(sum(self.fpsTimes)/len(self.fpsTimes)))
         #################
         event_list = pygame.event.get()
-        self.x += self.moveX*vv*dt                  # This is absolutely genius!
-        self.y += self.moveY*vv*dt                  # aga äkki peaks resolutioniga ka kuidagi läbi korrutama
+        self.x += self.moveX*vv*dt*self.playersize/40                  # This is absolutely genius!
+        self.y += self.moveY*vv*dt*self.playersize/40                  
        
         for event in event_list:
             if event.type == pygame.QUIT:
@@ -98,7 +98,7 @@ class Game:
                         print("game not over")
                         self.end_counter = 0
                         self.cycle = 0
-                        self.ballPos = [50, 50]
+                        self.ballPos = [self.playersize+10, self.playersize+10]
                         self.ballDir = [random.randint(-100, 100), random.randint(-100, 100)]
                         self.moveX = 0                             
                         self.moveY = 0
@@ -109,10 +109,11 @@ class Game:
 
             if event.type == pygame.VIDEORESIZE:
                 self.wx, self.wy = pygame.display.get_surface().get_size()
-                self.end_surface = pygame.Surface((self.wx, self.wy))                               # broken endscreen fix
+                self.end_surface = pygame.Surface((self.wx, self.wy))                               # Endscreen fix
                 self.end_surface.fill((255, 0, 0))                                                  # If window is resized and there
                 if self.moveX == 0 and self.moveY == 0:                                             # is no movement yet, move the
                     self.x, self.y = self.wx - 120,self.wy/2                                        # players to the edge of the new window
+                    self.ballPos = [self.playersize+10, self.playersize+10]
                 if self.wx > self.wy:
                     self.playersize = (self.wy / 12)
                 elif self.wy > self.wx:
@@ -121,14 +122,13 @@ class Game:
                 self.collisiondist = self.playersize + 5
                     
 
-        if self.y < 20 :                 # P1 logic
-            self.moveY = 10
-            self.moveY = 10             # Used to be here to teleport player
-        if self.x > self.wx - 60:       # to the other side of the window upon
-            self.moveX = -10            # reaching the end, but was replaced
-        if self.x < 20:                  # by an epic BOUNCE function.
+        if self.y < 20:                                 # Põrke loogika
+            self.moveY = 10                             
+        if self.x > self.wx - 20-self.playersize:
+            self.moveX = -10
+        if self.x < 20:
             self.moveX = 10
-        if self.y > self.wy - 60:       # PRAEGU ON KATKI!!!!!!!!!!!
+        if self.y > self.wy - 20-self.playersize:
             self.moveY = -10
 
         if (self.x == self.wx - 120 and self.y == self.wy/2): # Ei teadnud kuidas teistpidi pöörata.
@@ -215,7 +215,7 @@ class Game:
             self.event()
             self.update()
             self.render()
-            self.clock.tick(500)     # 500 is the magic number
+            self.clock.tick(480)     # 500 is NOT the magic number
 
 
 
